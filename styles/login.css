@@ -260,6 +260,15 @@ body, html {
     margin: 0 0 1.75rem 0;
 }
 
+.message-box{
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 768px) {
     .login-page {
@@ -280,3 +289,6 @@ body, html {
         padding: 2rem 1.5rem;
     }
 }
+
+
+

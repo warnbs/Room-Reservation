@@ -21,7 +21,6 @@ include '../includes/header.php';
 
         <form method="POST">
             <div class="form-card-body">
-
                 <div class="form-group">
                     <label for="txtroom">Room name</label>
                     <input type="text" id="txtroom" name="txtroom" placeholder="e.g. Room 101">
@@ -39,7 +38,6 @@ include '../includes/header.php';
                         <option>Unavailable</option>
                     </select>
                 </div>
-
             </div>
 
             <div class="form-card-footer">

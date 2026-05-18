@@ -24,12 +24,12 @@
         </div>
     </div>
 
-    <!-- ── Right: form panel ── -->
     <div class="login-form-panel">
         <div class="login-box">
             <div class="gold-line"></div>
             <h2>Welcome back</h2>
             <p class="subtitle">Sign in to your account to continue</p>
+
 
             <form method="post">
                 <div class="field-group">
@@ -40,8 +40,18 @@
                     <label for="txtpassword">Password</label>
                     <input type="password" id="txtpassword" name="txtpassword" placeholder="••••••••">
                 </div>
+
                 <input type="submit" name="btnLogin" value="Log In" class="btn-login-submit">
             </form>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger py-2 small" role="alert">
+                    <?php 
+                        echo $_SESSION['error']; 
+                        unset($_SESSION['error']);
+                    ?>
+                </div>
+            <?php endif; ?>
 
             <div class="login-footer">
                 Don't have an account? <a href="register.php">Register here</a>
@@ -61,7 +71,11 @@ if(isset($_POST['btnLogin'])){
     if(mysqli_num_rows($result) > 0){
         $user = mysqli_fetch_assoc($result);
 
-        if(password_verify($password,$user['password'])){
+        if(!password_verify($password,$user['password'])){
+            $_SESSION['error'] = 'Incorrect password';
+            header("location: login.php");
+            exit();
+        } else {
             $user_id = $user['user_id'];
 
             $checkAdmin = mysqli_query($connection,"SELECT * FROM tbadmin WHERE user_id=$user_id");
@@ -75,15 +89,11 @@ if(isset($_POST['btnLogin'])){
                 header("location: user/dashboard.php");
             } 
 			exit();
-        } else {
-            echo "<script language='javascript'>
-				alert('Incorrect password!');s
-			</script>";
         }
     } else {
-        echo "<script language='javascript'>
-				alert('User not found!');s
-			</script>";
+        $_SESSION['error'] = 'User not found';
+        header("location: login.php");
+        exit();
     }
 }
 ?>

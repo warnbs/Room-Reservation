@@ -117,9 +117,9 @@ if(isset($_POST['btnRegister'])){
     $year_level = trim($_POST['txtyear_level']);
 
     if(empty($fname) || empty($lname) || empty($gender) || empty($mobile) || empty($email) || empty($password_input) || empty($program) || empty($year_level)){
-        echo "<script>
-                alert('All fields are required.');
-              </script>";
+        echo "<div class='message-box'>
+            All fields are required.
+          </div>";
     }else{
         $password = password_hash($password_input, PASSWORD_DEFAULT);
 
